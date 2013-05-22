@@ -4,8 +4,6 @@ import net.lifesizedesign.rain.graphics.Screen;
 import net.lifesizedesign.rain.graphics.Sprite;
 
 public class GrassTile extends Tile {
-	
-	public static Tile grass = new GrassTile(Sprite.grass);
 
 	public GrassTile(Sprite sprite) {
 		super(sprite);
