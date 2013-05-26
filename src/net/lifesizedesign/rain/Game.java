@@ -17,6 +17,7 @@ import net.lifesizedesign.rain.graphics.Screen;
 import net.lifesizedesign.rain.input.Keyboard;
 import net.lifesizedesign.rain.level.Level;
 import net.lifesizedesign.rain.level.RandomLevel;
+import net.lifesizedesign.rain.level.SpawnLevel;
 
 public class Game extends Canvas implements Runnable {
 	private static final long serialVersionUID = 1L;
@@ -45,7 +46,7 @@ public class Game extends Canvas implements Runnable {
 		screen = new Screen(width, height);
 		frame = new JFrame();
 		key = new Keyboard();
-		level = new RandomLevel(64, 64);
+		level = new SpawnLevel("/textures/level.png");
 		player = new Player(key);
 
 		addKeyListener(key);
