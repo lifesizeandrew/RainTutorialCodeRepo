@@ -5,9 +5,11 @@ import net.lifesizedesign.rain.level.tile.Tile;
 
 public class Level {
 
-	protected Tile[] tiles;
 	protected int width, height;
 	protected int[] tilesInt;
+	protected int[] tiles;
+	
+	public static Level spawn = new SpawnLevel("/levels/spawn.png");
 
 	public Level(int width, int height) {
 		this.width = width;
@@ -42,21 +44,26 @@ public class Level {
 
 		for (int y = y0; y < y1; y++) {
 			for (int x = x0; x < x1; x++) {
-				//getTile(x, y).render(x, y, screen);
-				if (x + y * 16 < 0 || x + y * 16 >= 256) {
-					Tile.voidTile.render(x, y, screen);
-					continue;
-				}
-				tiles[x + y * 16].render(x, y, screen);
+				getTile(x, y).render(x, y, screen);
 			}
 		}
 	}
 
+	// Grass = 0xff00ff00
+	// Flower = 0xffffff00
+	// Rock = 0xff787878
+	// Hedge = 0xff337700
+	// Wall = 0xff000000
+	// Floor = 0xffacacac
+	
 	public Tile getTile(int x, int y) {
 		if (x < 0 || y < 0 || x >= width || y >= height) return Tile.voidTile;
-		if (tilesInt[x + y * width] == 0) return Tile.grass;
-		if (tilesInt[x + y * width] == 1) return Tile.flower;
-		if (tilesInt[x + y * width] == 2) return Tile.rock;
+		if (tiles[x + y * width] == Tile.col_spawn_grass) return Tile.spawn_grass;
+		if (tiles[x + y * width] == Tile.col_spawn_hedge) return Tile.spawn_hedge;
+		if (tiles[x + y * width] == Tile.col_spawn_water) return Tile.spawn_water;
+		if (tiles[x + y * width] == Tile.col_spawn_floor) return Tile.spawn_floor;
+		if (tiles[x + y * width] == Tile.col_spawn_wall) return Tile.spawn_wall;
+		if (tiles[x + y * width] == Tile.col_spawn_stone) return Tile.spawn_stone;
 		return Tile.voidTile;
 	}
 
