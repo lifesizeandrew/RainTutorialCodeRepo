@@ -5,7 +5,7 @@ import net.lifesizedesign.rain.graphics.Sprite;
 import net.lifesizedesign.rain.level.tile.Tile;
 
 public class SpawnWaterTile extends Tile {
-
+	
 	public SpawnWaterTile(Sprite sprite) {
 		super(sprite);
 	}

@@ -14,7 +14,7 @@ public abstract class Mob extends Entity {
 	protected int dir = 0;
 	protected boolean moving = false;
 	protected boolean walking = false;
-	
+
 	protected List<Projectile> projectiles = new ArrayList<Projectile>();
 
 	public void move(int xa, int ya) {
@@ -39,7 +39,7 @@ public abstract class Mob extends Entity {
 
 	protected void shoot(int x, int y, double dir) {
 		//double dirDeg = dir * 180 / Math.PI;
-		Projectile p =new WizardProjectile(x,y,(int)dir);
+		Projectile p = new WizardProjectile(x, y, dir);
 		projectiles.add(p);
 		level.add(p);
 	}
