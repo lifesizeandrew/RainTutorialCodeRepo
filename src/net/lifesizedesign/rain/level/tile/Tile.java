@@ -36,10 +36,10 @@ public class Tile {
 	public static final int col_spawn_grass = 0xff00ff00;
 	public static final int col_spawn_hedge = 0xff20a800;
 	public static final int col_spawn_water = 0xff0000ff;
-	public static final int col_spawn_rock = 0;
+	public static final int col_spawn_rock = 0xff7e6d4b;
 	public static final int col_spawn_floor = 0xff787878;
 	public static final int col_spawn_wall = 0xff000000;
-	public static final int col_spawn_brick = 0;
+	public static final int col_spawn_brick = 0xffff2121;
 	public static final int col_spawn_stone = 0xffa48000;
 	
 	public Tile(Sprite sprite) {

@@ -1,8 +1,10 @@
 package net.lifesizedesign.rain.entity.mob;
 
+import net.lifesizedesign.rain.Game;
 import net.lifesizedesign.rain.graphics.Screen;
 import net.lifesizedesign.rain.graphics.Sprite;
 import net.lifesizedesign.rain.input.Keyboard;
+import net.lifesizedesign.rain.input.Mouse;
 
 public class Player extends Mob {
 
@@ -39,6 +41,18 @@ public class Player extends Mob {
 			walking = true;
 		} else {
 			walking = false;
+		}
+
+		updateShooting();
+	}
+
+	private void updateShooting() {
+
+		if (Mouse.getB() == 1) {
+			double dx = Mouse.getX() - Game.getWindowWidth() / 2;
+			double dy = Mouse.getY() - Game.getWindowHeight() / 2;
+			double dir = Math.atan2(dy, dx);
+			shoot(x, y, dir);
 		}
 	}
 

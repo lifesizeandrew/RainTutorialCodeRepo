@@ -1,6 +1,11 @@
 package net.lifesizedesign.rain.entity.mob;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import net.lifesizedesign.rain.entity.Entity;
+import net.lifesizedesign.rain.entity.projectile.Projectile;
+import net.lifesizedesign.rain.entity.projectile.WizardProjectile;
 import net.lifesizedesign.rain.graphics.Sprite;
 
 public abstract class Mob extends Entity {
@@ -8,6 +13,9 @@ public abstract class Mob extends Entity {
 	protected Sprite sprite;
 	protected int dir = 0;
 	protected boolean moving = false;
+	protected boolean walking = false;
+	
+	protected List<Projectile> projectiles = new ArrayList<Projectile>();
 
 	public void move(int xa, int ya) {
 		if (xa != 0 && ya != 0) {
@@ -27,6 +35,13 @@ public abstract class Mob extends Entity {
 	}
 
 	public void update() {
+	}
+
+	protected void shoot(int x, int y, double dir) {
+		//double dirDeg = dir * 180 / Math.PI;
+		Projectile p =new WizardProjectile(x,y,(int)dir);
+		projectiles.add(p);
+		level.add(p);
 	}
 
 	private boolean collision(int xa, int ya) {

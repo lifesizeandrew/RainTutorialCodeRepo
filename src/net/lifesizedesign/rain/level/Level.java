@@ -1,5 +1,9 @@
 package net.lifesizedesign.rain.level;
 
+import java.util.ArrayList;
+import java.util.List;
+
+import net.lifesizedesign.rain.entity.Entity;
 import net.lifesizedesign.rain.graphics.Screen;
 import net.lifesizedesign.rain.level.tile.Tile;
 
@@ -8,6 +12,8 @@ public class Level {
 	protected int width, height;
 	protected int[] tilesInt;
 	protected int[] tiles;
+	
+	private List<Entity> entities = new ArrayList<Entity>();
 	
 	public static Level spawn = new SpawnLevel("/levels/spawn.png");
 
@@ -30,6 +36,9 @@ public class Level {
 	}
 
 	public void update() {
+		for(int i = 0; i< entities.size();i++){
+			entities.get(i).update();
+		}
 	}
 
 	private void time() {
@@ -47,6 +56,13 @@ public class Level {
 				getTile(x, y).render(x, y, screen);
 			}
 		}
+		for(int i = 0; i< entities.size();i++){
+			entities.get(i).render(screen);
+		}
+	}
+	
+	public void add(Entity e) {
+		entities.add(e);
 	}
 
 	// Grass = 0xff00ff00
@@ -61,8 +77,10 @@ public class Level {
 		if (tiles[x + y * width] == Tile.col_spawn_grass) return Tile.spawn_grass;
 		if (tiles[x + y * width] == Tile.col_spawn_hedge) return Tile.spawn_hedge;
 		if (tiles[x + y * width] == Tile.col_spawn_water) return Tile.spawn_water;
+		if (tiles[x + y * width] == Tile.col_spawn_rock) return Tile.spawn_rock;
 		if (tiles[x + y * width] == Tile.col_spawn_floor) return Tile.spawn_floor;
 		if (tiles[x + y * width] == Tile.col_spawn_wall) return Tile.spawn_wall;
+		if (tiles[x + y * width] == Tile.col_spawn_brick) return Tile.spawn_brick;
 		if (tiles[x + y * width] == Tile.col_spawn_stone) return Tile.spawn_stone;
 		return Tile.voidTile;
 	}
