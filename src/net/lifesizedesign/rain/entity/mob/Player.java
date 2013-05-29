@@ -1,6 +1,7 @@
 package net.lifesizedesign.rain.entity.mob;
 
 import net.lifesizedesign.rain.Game;
+import net.lifesizedesign.rain.entity.projectile.Projectile;
 import net.lifesizedesign.rain.graphics.Screen;
 import net.lifesizedesign.rain.graphics.Sprite;
 import net.lifesizedesign.rain.input.Keyboard;
@@ -42,8 +43,16 @@ public class Player extends Mob {
 		} else {
 			walking = false;
 		}
-
+		clear();
 		updateShooting();
+	}
+
+	private void clear() {
+		for (int i = 0; i < level.getProjectiles().size(); i++) {
+			Projectile p = level.getProjectiles().get(i);
+			if (p.isRemoved()) level.getProjectiles().remove(i);
+		}
+
 	}
 
 	private void updateShooting() {

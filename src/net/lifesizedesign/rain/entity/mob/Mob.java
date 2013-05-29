@@ -15,9 +15,8 @@ public abstract class Mob extends Entity {
 	protected boolean moving = false;
 	protected boolean walking = false;
 
-	protected List<Projectile> projectiles = new ArrayList<Projectile>();
-
 	public void move(int xa, int ya) {
+		System.out.println("Size: " + level.getProjectiles().size());
 		if (xa != 0 && ya != 0) {
 			move(xa, 0);
 			move(0, ya);
@@ -40,8 +39,7 @@ public abstract class Mob extends Entity {
 	protected void shoot(int x, int y, double dir) {
 		//double dirDeg = dir * 180 / Math.PI;
 		Projectile p = new WizardProjectile(x, y, dir);
-		projectiles.add(p);
-		level.add(p);
+		level.addProjectile(p);
 	}
 
 	private boolean collision(int xa, int ya) {

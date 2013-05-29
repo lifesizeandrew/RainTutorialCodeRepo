@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import net.lifesizedesign.rain.entity.Entity;
+import net.lifesizedesign.rain.entity.projectile.Projectile;
 import net.lifesizedesign.rain.graphics.Screen;
 import net.lifesizedesign.rain.level.tile.Tile;
 
@@ -12,9 +13,10 @@ public class Level {
 	protected int width, height;
 	protected int[] tilesInt;
 	protected int[] tiles;
-	
+
 	private List<Entity> entities = new ArrayList<Entity>();
-	
+	private List<Projectile> projectiles = new ArrayList<Projectile>();
+
 	public static Level spawn = new SpawnLevel("/levels/spawn.png");
 
 	public Level(int width, int height) {
@@ -36,9 +38,16 @@ public class Level {
 	}
 
 	public void update() {
-		for(int i = 0; i< entities.size();i++){
+		for (int i = 0; i < entities.size(); i++) {
 			entities.get(i).update();
 		}
+		for (int i = 0; i < projectiles.size(); i++) {
+			projectiles.get(i).update();
+		}
+	}
+	
+	public List<Projectile> getProjectiles() {
+		return projectiles;
 	}
 
 	private void time() {
@@ -56,13 +65,20 @@ public class Level {
 				getTile(x, y).render(x, y, screen);
 			}
 		}
-		for(int i = 0; i< entities.size();i++){
+		for (int i = 0; i < entities.size(); i++) {
 			entities.get(i).render(screen);
 		}
+		for (int i = 0; i < projectiles.size(); i++) {
+			projectiles.get(i).render(screen);
+		}
 	}
-	
+
 	public void add(Entity e) {
 		entities.add(e);
+	}
+
+	public void addProjectile(Projectile p) {
+		projectiles.add(p);
 	}
 
 	// Grass = 0xff00ff00
@@ -71,7 +87,7 @@ public class Level {
 	// Hedge = 0xff337700
 	// Wall = 0xff000000
 	// Floor = 0xffacacac
-	
+
 	public Tile getTile(int x, int y) {
 		if (x < 0 || y < 0 || x >= width || y >= height) return Tile.voidTile;
 		if (tiles[x + y * width] == Tile.col_spawn_grass) return Tile.spawn_grass;
